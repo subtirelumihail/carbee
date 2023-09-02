@@ -5,6 +5,10 @@ import useGetAppointments from "@/app/hooks/useGetAppointments";
 
 import AppointmentCard from "./AppointmentCard";
 
+// [BUG]: We don't get a startTime and completeTime
+// [SOLUTION]: We take in consideration the startTime to be the same with the
+// scheduledTime and we calculate the completeTime based on the duration and the scheduledTime
+
 export type AppointmentType = {
   id: string;
   paymentId: string;
