@@ -27,6 +27,11 @@ export const authOptions = {
   providers,
   callbacks: {
     async jwt({ token, user }: any) {
+      // [BUG]: Currently getServerSession is not working in the new Edge Runtime.
+      // https://github.com/nextauthjs/next-auth/issues/7732#issuecomment-1577104038
+      // [SOLUTION]: Because we cannot get the token from the user session and pass
+      // it to the api service we add it to the next auth jwt payload in order to use
+      // it in our middleware
       if (user) {
         token.api_token = user.token;
       }
