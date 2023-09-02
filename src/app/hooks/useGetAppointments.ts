@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 import { getAppointments, Paginate } from "@/services/appointments";
 
@@ -13,17 +13,17 @@ const useGetAppointments = () => {
     refetchOnWindowFocus: false,
   });
 
-  const handleNextPage = () => {
+  const handleNextPage = useCallback(() => {
     setPaginate({
       after: data?.pageInfo?.nextCursor,
     });
-  };
+  }, [data]);
 
-  const handlePreviousPage = () => {
+  const handlePreviousPage = useCallback(() => {
     setPaginate({
       before: data?.pageInfo?.previousCursor,
     });
-  };
+  }, [data]);
 
   return {
     appointments: data?.appointments,

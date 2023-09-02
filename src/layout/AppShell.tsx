@@ -1,22 +1,21 @@
 "use client";
 
-import { AppShell as MantineAppShell, useMantineTheme } from "@mantine/core";
-import { useState } from "react";
+import { AppShell as MantineAppShell } from "@mantine/core";
+import { memo, useState } from "react";
 
 import Header from "@/components/Header";
 import MobileMenuBar from "@/components/MobileMenuBar";
 
-const AppShell = ({ children }: { children: React.ReactNode }) => {
-  const theme = useMantineTheme();
+const AppShell = memo(function AppShell({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [opened, setOpened] = useState(false);
 
   return (
     <MantineAppShell
-      styles={{
-        main: {
-          background: theme.colors.gray[0],
-        },
-      }}
+      bg="gray.0"
       navbarOffsetBreakpoint="sm"
       asideOffsetBreakpoint="sm"
       aside={<MobileMenuBar opened={opened} />}
@@ -25,6 +24,6 @@ const AppShell = ({ children }: { children: React.ReactNode }) => {
       {children}
     </MantineAppShell>
   );
-};
+});
 
 export default AppShell;

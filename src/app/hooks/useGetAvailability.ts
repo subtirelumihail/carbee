@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 import { getAvailability } from "@/services/availability";
 
@@ -15,13 +15,16 @@ const useGetAvailability = () => {
     refetchOnWindowFocus: false,
   });
 
-  const handleFetch = (newDate: Date) => {
-    if (newDate === date) {
-      refetch();
-    } else {
-      setDate(newDate);
-    }
-  };
+  const handleFetch = useCallback(
+    (newDate: Date) => {
+      if (newDate === date) {
+        refetch();
+      } else {
+        setDate(newDate);
+      }
+    },
+    [date, refetch]
+  );
 
   return {
     fetchAvailability: handleFetch,
