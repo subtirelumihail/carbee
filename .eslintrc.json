@@ -1,0 +1,18 @@
+{
+  "extends": ["prettier", "next/core-web-vitals", "next"],
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "env": {
+    "es6": true
+  },
+  "plugins": ["prettier", "simple-import-sort", "import"],
+  "rules": {
+    "prettier/prettier": ["error"],
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "import/no-duplicates": "error"
+  }
+}
