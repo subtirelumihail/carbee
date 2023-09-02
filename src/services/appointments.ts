@@ -12,13 +12,15 @@ export type Paginate = {
 };
 
 export const getAppointments = async (paginate: Paginate) => {
+  const paginateQuery = Object.keys(paginate)
+    .map((type) => `&${type}=${paginate[type as keyof typeof paginate]}`)
+    .join("");
   try {
-    const res = await axios.get(`/api/appointments?size=12`);
+    const res = await axios.get(`/api/appointments?size=12${paginateQuery}`);
     const appointments = res.data?.edges.map((edge: EdgesType) => edge.node);
     return {
       appointments,
-      prevCursor: res.data?.pageInfo?.previousCursor,
-      nextCursor: res.data?.pageInfo?.nextCursor,
+      pageInfo: res?.data?.pageInfo,
     };
   } catch (err) {
     console.error(err);

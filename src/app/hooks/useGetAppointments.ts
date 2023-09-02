@@ -15,21 +15,22 @@ const useGetAppointments = () => {
 
   const handleNextPage = () => {
     setPaginate({
-      after: data?.nextCursor,
+      after: data?.pageInfo?.nextCursor,
     });
   };
 
   const handlePreviousPage = () => {
     setPaginate({
-      before: data?.prevCursor,
+      before: data?.pageInfo?.previousCursor,
     });
   };
 
   return {
     appointments: data?.appointments,
     pagination: {
-      prevCursor: data?.prevCursor,
-      nextCursor: data?.nextCursor,
+      ...data?.pageInfo,
+      goNextPage: handleNextPage,
+      goPreviousPage: handlePreviousPage,
     },
     isLoading,
     isFetching,

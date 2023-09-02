@@ -40,8 +40,12 @@ function Appointments() {
         ))}
       </Grid>
       <Group>
-        {pagination.prevCursor && <Button>Previous</Button>}
-        {pagination.nextCursor && <Button>Next</Button>}
+        {pagination.hasPreviousPage && (
+          <Button onClick={pagination.goPreviousPage}>Previous</Button>
+        )}
+        {pagination.hasNextPage && (
+          <Button onClick={pagination.goNextPage}>Next</Button>
+        )}
       </Group>
     </Stack>
   );
