@@ -21,7 +21,7 @@ export type AppointmentType = {
   };
 };
 
-function Appointments() {
+const Appointments = () => {
   const { isFetching, appointments, pagination } = useGetAppointments();
 
   return (
@@ -53,6 +53,6 @@ function Appointments() {
       </Group>
     </Stack>
   );
-}
+};
 
 export default Appointments;

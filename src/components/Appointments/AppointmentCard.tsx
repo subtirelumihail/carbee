@@ -1,15 +1,6 @@
 "use client";
-import {
-  Badge,
-  Card,
-  Flex,
-  Group,
-  List,
-  Stack,
-  Text,
-  Title,
-} from "@mantine/core";
-import { FC } from "react";
+import { Badge, Card, Flex, Group, List, Stack, Text } from "@mantine/core";
+import { FC, memo } from "react";
 
 import { addMinutesToDate, formatDate, formatTime } from "@/utils/date";
 
@@ -38,7 +29,9 @@ export const statuses = {
   },
 };
 
-const Appointments: FC<AppointmentCardInterface> = ({ appointment }) => {
+const Appointments: FC<AppointmentCardInterface> = memo(function Appointments({
+  appointment,
+}) {
   const renderStartStopTime = () => {
     if (appointment.status === "COMPLETE") {
       const start = formatTime(appointment.scheduledTime);
@@ -87,6 +80,6 @@ const Appointments: FC<AppointmentCardInterface> = ({ appointment }) => {
       </Stack>
     </Card>
   );
-};
+});
 
 export default Appointments;
