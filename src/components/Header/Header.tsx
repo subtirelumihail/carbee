@@ -6,7 +6,6 @@ import {
   Header as MantineHeader,
   MediaQuery,
   Text,
-  Title,
   useMantineTheme,
 } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
@@ -21,20 +20,9 @@ export interface HeaderProps extends PropsWithChildren {
 }
 
 const Header: FC<HeaderProps> = ({ opened = false, setOpened = () => {} }) => {
-  const [loading, setLoading] = useState(false);
   const theme = useMantineTheme();
   const smallScreen = useMediaQuery("(min-width: 48em)");
-  const { data: session, status } = useSession();
-
-  const handleSignOut = async () => {
-    setLoading(true);
-    try {
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { data: session } = useSession();
 
   return (
     <MantineHeader height={{ base: 70 }} p="md">
@@ -60,11 +48,7 @@ const Header: FC<HeaderProps> = ({ opened = false, setOpened = () => {} }) => {
                   <RouteLinks />
                 </Group>
               )}
-              <Button
-                loading={loading}
-                variant="subtle"
-                onClick={() => signOut()}
-              >
+              <Button variant="subtle" onClick={() => signOut()}>
                 Sign out
               </Button>
             </Flex>
